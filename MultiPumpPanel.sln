@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2050
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "MultiPumpPanel", "MultiPumpPanel\MultiPumpPanel.vbproj", "{3E430C6C-DAA3-4D7A-AF9E-E689E211FEC9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3E430C6C-DAA3-4D7A-AF9E-E689E211FEC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E430C6C-DAA3-4D7A-AF9E-E689E211FEC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E430C6C-DAA3-4D7A-AF9E-E689E211FEC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E430C6C-DAA3-4D7A-AF9E-E689E211FEC9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {788FC93C-D448-4F53-A5B4-8BE5F062DC35}
+	EndGlobalSection
+EndGlobal
