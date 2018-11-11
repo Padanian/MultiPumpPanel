@@ -13,6 +13,8 @@
     Private m_semaphorColor As Color = Color.Yellow
     Private m_isSemaphorVisible As Boolean
     Private m_isSemaphorBlinking As Boolean
+    Private m_hourCounterPump1 As Integer
+    Private m_hourCounterPump2 As Integer
     Dim centreX As Double = 32
     Dim centreY As Double = 44
     Dim apen As New Pen(Color.LightGray, 1)
@@ -131,14 +133,36 @@
             Me.Refresh()
         End Set
     End Property
+    Public Property hourCounterPump1 As Integer
+        Get
+            hourCounterPump1 = m_hourCounterPump1
+        End Get
+        Set(hourCounterPump1 As Integer)
+            If hourCounterPump1 >= 0 And hourCounterPump1 < 999999 Then
+                m_hourCounterPump1 = hourCounterPump1
+                lblCounterPump1.Text = hourCounterPump1.ToString.PadLeft(6, "0")
+            End If
+        End Set
+    End Property
+    Public Property hourCounterPump2 As Integer
+        Get
+            hourCounterPump2 = m_hourCounterPump2
+        End Get
+        Set(hourCounterPump2 As Integer)
+            If hourCounterPump2 >= 0 And hourCounterPump2 < 999999 Then
+                m_hourCounterPump2 = hourCounterPump2
+                lblCounterPump2.Text = hourCounterPump2.ToString.PadLeft(6, "0")
+            End If
+        End Set
+    End Property
 
     Private Sub MultiPumpPanel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        Dim Pump1CalendarStrip As New MultiGenPointCalendarStrip.MultiGenPointCalendarStrip
-        With Pump1CalendarStrip
-            .Location = New Point(175, 20)
-            .Settings(72, 144, 160, 180, 0, 0)
-        End With
-        Me.Controls.Add(Pump1CalendarStrip)
+        'Dim Pump1CalendarStrip As New MultiGenPointCalendarStrip.MultiGenPointCalendarStrip
+        'With Pump1CalendarStrip
+        '    .Location = New Point(175, 20)
+        '    .Settings(72, 144, 160, 180, 0, 0)
+        'End With
+        'Me.Controls.Add(Pump1CalendarStrip)
     End Sub
 
     Public Property lbltext As String

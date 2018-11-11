@@ -163,5 +163,8 @@
   <ItemGroup>
     <None Include="Resources\PanelSwitchOnPumpAut.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1024px-Location_dot_red.svg.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
