@@ -6,42 +6,101 @@
     Private m_lblPumptext As String = "Text"
     Private m_semaphortext As String = "Text"
     Private m_selectedPositionOnOffSwitch As Integer
-    Private m_selectedPositionPumpSwitch As Integer
+    Private m_selectedPositionPumpSwitch As Integer = 1
     Private m_positionsOnOffSwitch As Integer = 2
     Private m_positionsPumpSwitch As Integer = 3
     Private m_WarningThreshold As Integer = 80
     Private m_semaphorColor As Color = Color.Yellow
     Private m_isSemaphorVisible As Boolean
     Private m_isSemaphorBlinking As Boolean
-    Private m_hourCounterPump1 As Integer
-    Private m_hourCounterPump2 As Integer
+
     Dim centreX As Double = 32
     Dim centreY As Double = 44
     Dim apen As New Pen(Color.LightGray, 1)
     Dim lpen As New Pen(Color.Black, 2)
     Dim angleSwitchOnOff As Double = -3 / 4 * Pi
-    Dim angleSwitchPump As Double = -3 / 4 * Pi
+    Dim angleSwitchPump As Double = -1 / 2 * Pi
     Dim blinkingSemaphorTimer As New Timer
     Dim pbSemaphor As New PictureBox
     Dim lblSemaphorText As New Label
     Dim clickAreaOnOffSwitch As Rectangle = New Rectangle(0, 0, 64, 100)
     Dim clickAreaPumpSwitch As Rectangle = New Rectangle(101, 0, 64, 100)
 
+    Private m_hourCounterPump1 As Integer
+    Private m_hourCounterPump2 As Integer
+    Private m_pump1Running As Boolean
+    Private m_pump2Running As Boolean
+    Private m_pump1Alarm As Boolean
+    Private m_pump2Alarm As Boolean
+
+    Sub New()
+
+        ' La chiamata è richiesta dalla finestra di progettazione.
+        InitializeComponent()
+
+        ' Aggiungere le eventuali istruzioni di inizializzazione dopo la chiamata a InitializeComponent().
+        AddHandler blinkingSemaphorTimer.Tick, AddressOf blinkingSemaphor
+        With pbSemaphor
+            .Location = New Point(6, 142)
+            .Size = New Size(52, 52)
+            .Name = "pbSemaphor"
+            .Visible = False
+            .Image = My.Resources.led_amber_black
+            .SizeMode = PictureBoxSizeMode.Zoom
+        End With
+        Me.Controls.Add(pbSemaphor)
+
+        With lblSemaphorText
+            .Size = New Size(58, 18)
+            .Font = New Font("SegoeUI", 8.25, FontStyle.Regular)
+            .Name = "lblSemaphorText"
+            .Location = New Point(3, 118)
+            .Text = m_semaphortext
+            .Visible = False
+            .TextAlign = ContentAlignment.MiddleCenter
+        End With
+        Me.Controls.Add(lblSemaphorText)
 
 
+
+    End Sub
+    Private Sub MultiPumpPanel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        pbPump1LED.Image = My.Resources.led_off_black
+        pbPump2LED.Image = My.Resources.led_off_black
+        lbltext = "Switch"
+        semaphortext = "Signals"
+        isSemaphorVisible = True
+        semaphorColor = Color.Black
+        lblPumptext = "Mode"
+
+        For Each ctl In Me.Controls
+            If ctl.name <> pbSwitchOnOff.Name Then
+                ctl.enabled = False
+            End If
+        Next
+    End Sub
     Private Sub pbSwitchOnOff_click(sender As Object, e As EventArgs) Handles pbSwitchOnOff.Click
         m_selectedPositionOnOffSwitch += 1
         If m_selectedPositionOnOffSwitch > m_positionsOnOffSwitch - 1 Then
             m_selectedPositionOnOffSwitch = 0
+            For Each ctl In Me.Controls
+                If ctl.name <> pbSwitchOnOff.Name Then
+                    ctl.enabled = False
+                End If
+            Next
             angleSwitchOnOff = -3 / 4 * Pi
             Me.Refresh()
             Exit Sub
         End If
         If m_positionsOnOffSwitch = 2 Then
+            For Each ctl In Me.Controls
+                If ctl.name <> pbSwitchOnOff.Name Then
+                    ctl.enabled = True
+                End If
+            Next
             angleSwitchOnOff += Pi / 2
-        Else
-            angleSwitchOnOff += Pi / 4
         End If
+
 
 
         Me.Refresh()
@@ -63,7 +122,6 @@
 
         Me.Refresh()
     End Sub
-
     Public Property isSemaphorVisible As Boolean
         Get
             isSemaphorVisible = m_isSemaphorVisible
@@ -155,16 +213,62 @@
             End If
         End Set
     End Property
-
-    Private Sub MultiPumpPanel_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'Dim Pump1CalendarStrip As New MultiGenPointCalendarStrip.MultiGenPointCalendarStrip
-        'With Pump1CalendarStrip
-        '    .Location = New Point(175, 20)
-        '    .Settings(72, 144, 160, 180, 0, 0)
-        'End With
-        'Me.Controls.Add(Pump1CalendarStrip)
-    End Sub
-
+    Public Property pump1Running As Boolean
+        Get
+            pump1Running = m_pump1Running
+        End Get
+        Set(pump1Running As Boolean)
+            If Not pump1Alarm Then
+                m_pump1Running = pump1Running
+                pbPump1LED.Image = My.Resources.led_green_black
+            End If
+            If Not pump1Running And Not pump1Alarm Then
+                pbPump1LED.Image = My.Resources.led_off_black
+            End If
+        End Set
+    End Property
+    Public Property pump2Running As Boolean
+        Get
+            pump2Running = m_pump2Running
+        End Get
+        Set(pump2Running As Boolean)
+            If Not pump2Alarm Then
+                m_pump2Running = pump2Running
+                pbPump2LED.Image = My.Resources.led_green_black
+            End If
+            If Not pump2Running And Not pump2Alarm Then
+                pbPump2LED.Image = My.Resources.led_off_black
+            End If
+        End Set
+    End Property
+    Public Property pump1Alarm As Boolean
+        Get
+            pump1Alarm = m_pump1Alarm
+        End Get
+        Set(pump1Alarm As Boolean)
+            If Not pump1Running Then
+                m_pump1Alarm = pump1Alarm
+                pbPump1LED.Image = My.Resources.led_red_black
+            End If
+            If Not pump1Running And Not pump1Alarm Then
+                pbPump1LED.Image = My.Resources.led_off_black
+            End If
+        End Set
+    End Property
+    Public Property pump2Alarm As Boolean
+        Get
+            pump2Alarm = m_pump2Alarm
+        End Get
+        Set(pump2Alarm As Boolean)
+            If Not pump2Running Then
+                m_pump2Alarm = pump2Alarm
+                pbPump2LED.Image = My.Resources.led_red_black
+            End If
+            If Not pump2Running And Not pump2Alarm Then
+                pbPump2LED.Image = My.Resources.led_off_black
+            End If
+        End Set
+    End Property
     Public Property lbltext As String
         Get
             lbltext = m_lbltext
@@ -199,36 +303,6 @@
             selectedPositionPumpSwitch = m_selectedPositionPumpSwitch
         End Get
     End Property
-
-    Sub New()
-
-        ' La chiamata è richiesta dalla finestra di progettazione.
-        InitializeComponent()
-
-        ' Aggiungere le eventuali istruzioni di inizializzazione dopo la chiamata a InitializeComponent().
-        AddHandler blinkingSemaphorTimer.Tick, AddressOf blinkingSemaphor
-        With pbSemaphor
-            .Location = New Point(6, 142)
-            .Size = New Size(52, 52)
-            .Name = "pbSemaphor"
-            .Visible = False
-            .Image = My.Resources.led_amber_black
-            .SizeMode = PictureBoxSizeMode.Zoom
-        End With
-        Me.Controls.Add(pbSemaphor)
-
-        With lblSemaphorText
-            .Size = New Size(58, 18)
-            .Font = New Font("SegoeUI", 8.25, FontStyle.Regular)
-            .Name = "lblSemaphorText"
-            .Location = New Point(3, 118)
-            .Text = m_semaphortext
-            .Visible = False
-            .TextAlign = ContentAlignment.MiddleCenter
-        End With
-        Me.Controls.Add(lblSemaphorText)
-
-    End Sub
     Private Sub GaugePaint(sender As Object, e As PaintEventArgs) Handles Me.Paint
 
 #Region "Switch ON OFF"
@@ -322,7 +396,6 @@
         End If
 
     End Sub
-
     Public Sub drawswitch(e, angle)
 
         If e = 2 Then
