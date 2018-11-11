@@ -139,5 +139,29 @@
   <ItemGroup>
     <None Include="Resources\led-red-black.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PanelSwitchAuto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PanelSwitchOff.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PanelSwitchOff-2pos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PanelSwitchOn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PanelSwitchOn-2pos.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PanelSwitchOnPump1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PanelSwitchOnPump2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\PanelSwitchOnPumpAut.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
 </Project>
