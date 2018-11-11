@@ -54,7 +54,7 @@
             .Size = New Size(58, 18)
             .Font = New Font("SegoeUI", 8.25, FontStyle.Regular)
             .Name = "lblSemaphorText"
-            .Location = New Point(3, 118)
+            .Location = New Point(3, 116)
             .Text = m_semaphortext
             .Visible = False
             .TextAlign = ContentAlignment.MiddleCenter

@@ -50,7 +50,7 @@ Partial Class MultiPumpPanel
         '
         'lblSwitchTag
         '
-        Me.lblSwitchTag.Location = New System.Drawing.Point(3, 81)
+        Me.lblSwitchTag.Location = New System.Drawing.Point(3, 79)
         Me.lblSwitchTag.Name = "lblSwitchTag"
         Me.lblSwitchTag.Size = New System.Drawing.Size(58, 18)
         Me.lblSwitchTag.TabIndex = 1
@@ -59,7 +59,7 @@ Partial Class MultiPumpPanel
         '
         'lblPumpTag
         '
-        Me.lblPumpTag.Location = New System.Drawing.Point(89, 81)
+        Me.lblPumpTag.Location = New System.Drawing.Point(89, 79)
         Me.lblPumpTag.Name = "lblPumpTag"
         Me.lblPumpTag.Size = New System.Drawing.Size(58, 18)
         Me.lblPumpTag.TabIndex = 2
@@ -154,7 +154,7 @@ Partial Class MultiPumpPanel
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(265, 122)
+        Me.Label5.Location = New System.Drawing.Point(253, 122)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(43, 13)
         Me.Label5.TabIndex = 6
@@ -163,7 +163,7 @@ Partial Class MultiPumpPanel
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(265, 154)
+        Me.Label6.Location = New System.Drawing.Point(253, 154)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(43, 13)
         Me.Label6.TabIndex = 6
@@ -172,7 +172,7 @@ Partial Class MultiPumpPanel
         'pbPump2LED
         '
         Me.pbPump2LED.Image = Global.MultiPumpPanel.My.Resources.Resources.led_off_black
-        Me.pbPump2LED.Location = New System.Drawing.Point(313, 145)
+        Me.pbPump2LED.Location = New System.Drawing.Point(301, 145)
         Me.pbPump2LED.Name = "pbPump2LED"
         Me.pbPump2LED.Size = New System.Drawing.Size(32, 32)
         Me.pbPump2LED.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -182,7 +182,7 @@ Partial Class MultiPumpPanel
         'pbPump1LED
         '
         Me.pbPump1LED.Image = Global.MultiPumpPanel.My.Resources.Resources.led_green_black
-        Me.pbPump1LED.Location = New System.Drawing.Point(313, 109)
+        Me.pbPump1LED.Location = New System.Drawing.Point(301, 109)
         Me.pbPump1LED.Name = "pbPump1LED"
         Me.pbPump1LED.Size = New System.Drawing.Size(32, 32)
         Me.pbPump1LED.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
@@ -213,6 +213,7 @@ Partial Class MultiPumpPanel
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Controls.Add(Me.pbPump2LED)
         Me.Controls.Add(Me.pbPump1LED)
         Me.Controls.Add(Me.NumericUpDown1)
@@ -229,7 +230,7 @@ Partial Class MultiPumpPanel
         Me.Controls.Add(Me.lblPumpTag)
         Me.Controls.Add(Me.lblSwitchTag)
         Me.Name = "MultiPumpPanel"
-        Me.Size = New System.Drawing.Size(348, 180)
+        Me.Size = New System.Drawing.Size(345, 205)
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
